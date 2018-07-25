@@ -17,7 +17,7 @@ part = Particles('avec-ts')
 # -----------------------------------------------------------------------------------------------------------
 # calculs somme sur quartiers
 # -----------------------------------------------------------------------------------------------------------
-somme_x, somme_y = quarter(part)
+somme_x, somme_y = part.quarter()
 print('\nSomme Dmv/Dt sur un quartier :')
 print(somme_x, somme_y)
 

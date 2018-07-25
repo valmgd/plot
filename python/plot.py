@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 class Particles :
+    """Classe Particles.
+    Coordonnées, variables du système de N-S, tension de surface."""
     # -------------------------------------------------------------------------------------------------------
     # constructeur
     # -------------------------------------------------------------------------------------------------------
@@ -98,18 +100,19 @@ class Particles :
 
         return(fig, ax)
     #}
-#}
 
-
-
-def quarter(part) :
-    n = len(part.x)
-    somme_x = somme_y = 0.
-    for i in range(0, n) :
-        if part.x[i] >= 0 and part.y[i] >= 0 :
-            somme_x += part.mvx[i]
-            somme_y += part.mvy[i]
+    # -------------------------------------------------------------------------------------------------------
+    # somme de la quantité de mouvement sur un quartier de la bulle
+    # -------------------------------------------------------------------------------------------------------
+    def quarter(self) :
+        n = len(self.x)
+        somme_x = somme_y = 0.
+        for i in range(0, n) :
+            if self.x[i] >= 0 and self.y[i] >= 0 :
+                somme_x += self.mvx[i]
+                somme_y += self.mvy[i]
+            #}
         #}
+        return(somme_x, somme_y)
     #}
-    return(somme_x, somme_y)
 #}
