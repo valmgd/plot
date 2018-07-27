@@ -11,6 +11,7 @@ from plot import *
 # données
 # -----------------------------------------------------------------------------------------------------------
 part = Particles('avec-ts')
+print(part)
 
 
 
@@ -51,6 +52,8 @@ ax.text(0.005, -0.013, s=vMax)
 ax.text(0.005, -0.014, s=wTot)
 
 part.plot_ts_forces()
+
+part.plot_curvature()
 
 
 
