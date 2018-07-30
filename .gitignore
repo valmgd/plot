@@ -1,7 +1,4 @@
 python/__pycache__
 
-out-sph/avec-ts/*.dat
-out-sph/avec-ts/*.csv
-
-out-sph/sans-ts/*.dat
-out-sph/sans-ts/*.csv
+out-sph/avec-ts/*
+out-sph/sans-ts/*
