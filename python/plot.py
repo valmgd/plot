@@ -66,18 +66,19 @@ class Particles :
     # représentation
     # -------------------------------------------------------------------------------------------------------
     def __repr__(self) :
-        chaine  =   'x    : ' + head_tail(self.x)
-        chaine += '\ny    : ' + head_tail(self.y)
-        chaine += '\nmvx  : ' + head_tail(self.mvx)
-        chaine += '\nmvy  : ' + head_tail(self.mvy)
-        chaine += '\nP    : ' + head_tail(self.P)
-        chaine += '\nvx   : ' + head_tail(self.vx)
-        chaine += '\nvy   : ' + head_tail(self.vy)
-        chaine += '\nFTSx : ' + head_tail(self.FTSx)
-        chaine += '\nFTSy : ' + head_tail(self.FTSy)
-        chaine += '\nw    : ' + head_tail(self.w)
-        chaine += '\nGRPx : ' + head_tail(self.GRPx)
-        chaine += '\nGRPy : ' + head_tail(self.GRPy)
+        chaine  =   'x     : ' + head_tail(self.x)
+        chaine += '\ny     : ' + head_tail(self.y)
+        chaine += '\nmvx   : ' + head_tail(self.mvx)
+        chaine += '\nmvy   : ' + head_tail(self.mvy)
+        chaine += '\nP     : ' + head_tail(self.P)
+        chaine += '\nvx    : ' + head_tail(self.vx)
+        chaine += '\nvy    : ' + head_tail(self.vy)
+        chaine += '\nFTSx  : ' + head_tail(self.FTSx)
+        chaine += '\nFTSy  : ' + head_tail(self.FTSy)
+        chaine += '\nw     : ' + head_tail(self.w)
+        chaine += '\nkappa : ' + head_tail(self.kappa)
+        chaine += '\nGRPx  : ' + head_tail(self.GRPx)
+        chaine += '\nGRPy  : ' + head_tail(self.GRPy)
 
         return(chaine)
     #}
