@@ -45,7 +45,7 @@ class Particles :
         self.vx   = np.loadtxt('../out-sph/' + directory + '/vx.dat')
         self.vy   = np.loadtxt('../out-sph/' + directory + '/vy.dat')
 
-        # Tension de surface
+        # Tension de surface volumique
         self.FTSx = np.loadtxt('../out-sph/' + directory + '/FTSx.dat')
         self.FTSy = np.loadtxt('../out-sph/' + directory + '/FTSy.dat')
 
@@ -55,18 +55,25 @@ class Particles :
         # courbure
         self.kappa = np.loadtxt('../out-sph/' + directory + '/kappa.dat')
 
-        # gradient de pression
-        self.GRPx = (self.w * self.FTSx - self.mvx) / self.w
-        self.GRPy = (self.w * self.FTSy - self.mvy) / self.w
+        # Force de tension de surface
+        self.wFTSx = self.w * self.FTSx
+        self.wFTSy = self.w * self.FTSy
+
+        # Force de pression
+        self.wGRPx = self.wFTSx - self.mvx
+        self.wGRPy = self.wFTSy - self.mvy
 
         self.n = len(self.x)
+
+        self.scale = 0.05
     #}
 
     # -------------------------------------------------------------------------------------------------------
     # représentation
     # -------------------------------------------------------------------------------------------------------
     def __repr__(self) :
-        chaine  =   'x     : ' + head_tail(self.x)
+        chaine  = 'Read from files :'
+        chaine += '\nx     : ' + head_tail(self.x)
         chaine += '\ny     : ' + head_tail(self.y)
         chaine += '\nmvx   : ' + head_tail(self.mvx)
         chaine += '\nmvy   : ' + head_tail(self.mvy)
@@ -77,8 +84,6 @@ class Particles :
         chaine += '\nFTSy  : ' + head_tail(self.FTSy)
         chaine += '\nw     : ' + head_tail(self.w)
         chaine += '\nkappa : ' + head_tail(self.kappa)
-        chaine += '\nGRPx  : ' + head_tail(self.GRPx)
-        chaine += '\nGRPy  : ' + head_tail(self.GRPy)
 
         return(chaine)
     #}
@@ -92,7 +97,7 @@ class Particles :
         cax = fig.colorbar(im, ax=ax)
         cax.set_label('Pressure [Pa]')
 
-        ax.quiver(self.x, self.y, self.mvx, self.mvy, angles='xy', scale=0.05, label='Quantité mvt', color='black')
+        ax.quiver(self.x, self.y, self.mvx, self.mvy, angles='xy', scale=self.scale, label='Quantité mvt', color='black')
 
         ax.set_xlabel('$x$ [m]')
         ax.set_ylabel('$y$ [m]')
@@ -123,25 +128,27 @@ class Particles :
     # plot 2 champs de vecteurs : le gradient de pression et la tension de surface
     # -------------------------------------------------------------------------------------------------------
     def plot_ts_forces(self) :
-        sc = 0.01
-        r = 0.015
+        sc = 1
+        r = 0.012
 
         fig, ax = plt.subplots(ncols=2)
 
         ax[0].scatter(self.x, self.y, s=20, label='Particules')
-        ax[0].quiver(self.x, self.y, self.GRPx, self.GRPy, angles='xy', scale=sc, label='GRP', color='black')
+        ax[0].quiver(self.x, self.y, -self.wGRPx, -self.wGRPy, angles='xy', scale=self.scale,
+            label='$-\omega GRP$', color='black')
         ax[0].set_xlabel('$x$ [m]')
         ax[0].set_ylabel('$y$ [m]')
-        ax[0].set_title('Gradient de pression')
+        ax[0].set_title('Force de pression ($-\omega$GRP)')
         ax[0].set_xlim((-r, r))
         ax[0].set_ylim((-r, r))
         set_graph_style(fig, ax[0])
 
         ax[1].scatter(self.x, self.y, s=20, label='Particules')
-        ax[1].quiver(self.x, self.y, self.FTSx, self.FTSy, angles='xy', scale=sc, label='FTS', color='black')
+        ax[1].quiver(self.x, self.y, self.wFTSx, self.wFTSy, angles='xy', scale=self.scale,
+            label='$\omega FTS$', color='black')
         ax[1].set_xlabel('$x$ [m]')
         ax[1].set_ylabel('$y$ [m]')
-        ax[1].set_title('Tension de surface')
+        ax[1].set_title('Force de tension de surface ($\omega$FTS)')
         ax[1].set_xlim((-r, r))
         ax[1].set_ylim((-r, r))
         set_graph_style(fig, ax[1])

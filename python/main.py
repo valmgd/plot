@@ -43,9 +43,8 @@ print('\n', wTot)
 # -----------------------------------------------------------------------------------------------------------
 # Quantité de mouvement
 # -----------------------------------------------------------------------------------------------------------
-titre1 = 'Quantité de mvt avec TS, t=1s\n initialisation bulle avec pression de Laplace'
-titre2 = 'Quantité de mvt avec TS, t=240s\n initialisation carré avec pression quelconque'
-fig, ax = part.plot_mvt_quantity(titre2)
+titre = 'Quantité de mvt avec TS\n initialisation bulle avec pression de Laplace\n$Dmv = -\omega GRP + \omega FTS$'
+fig, ax = part.plot_mvt_quantity(titre)
 ax.text(0.005, -0.011, s=qmvMax)
 ax.text(0.005, -0.012, s=ip)
 ax.text(0.005, -0.013, s=vMax)

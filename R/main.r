@@ -10,7 +10,8 @@ cat('Summary of curvature kappa (for non zero values).\n\n')
 print(summary(courbureSPH))
 x11()
 hist(courbureSPH, col='yellowgreen')
-locator(1)
+dev.copy(pdf, '../graphs/courbure.pdf')
+dev.off()
 
 # Extremum quantities
 file <- paste(dir, 'ExtremumQuantities.csv', sep='')
@@ -37,6 +38,3 @@ grid()
 
 dev.copy(pdf, '../graphs/quantities.pdf')
 dev.off()
-
-# attend que l'utilisateur clique sur la fenêtre
-locator(1)
