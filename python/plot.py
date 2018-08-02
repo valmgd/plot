@@ -49,6 +49,10 @@ class Particles :
         self.FTSx = np.loadtxt('../out-sph/' + directory + '/FTSx.dat')
         self.FTSy = np.loadtxt('../out-sph/' + directory + '/FTSy.dat')
 
+        # Force de pression
+        self.wGRPx = np.loadtxt('../out-sph/' + directory + '/wGRPx.dat')
+        self.wGRPy = np.loadtxt('../out-sph/' + directory + '/wGRPy.dat')
+
         # volume
         self.w    = np.loadtxt('../out-sph/' + directory + '/w.dat')
 
@@ -59,9 +63,9 @@ class Particles :
         self.wFTSx = self.w * self.FTSx
         self.wFTSy = self.w * self.FTSy
 
-        # Force de pression
-        self.wGRPx = self.wFTSx - self.mvx
-        self.wGRPy = self.wFTSy - self.mvy
+        # Pression volumique
+        self.GRPx = self.wGRPx / self.w
+        self.GRPy = self.wGRPy / self.w
 
         self.n = len(self.x)
 
