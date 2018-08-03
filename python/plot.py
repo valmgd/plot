@@ -86,6 +86,8 @@ class Particles :
         chaine += '\nvy    : ' + head_tail(self.vy)
         chaine += '\nFTSx  : ' + head_tail(self.FTSx)
         chaine += '\nFTSy  : ' + head_tail(self.FTSy)
+        chaine += '\nwGRPx : ' + head_tail(self.wGRPx)
+        chaine += '\nwGRPy : ' + head_tail(self.wGRPy)
         chaine += '\nw     : ' + head_tail(self.w)
         chaine += '\nkappa : ' + head_tail(self.kappa)
 
@@ -101,12 +103,14 @@ class Particles :
         cax = fig.colorbar(im, ax=ax)
         cax.set_label('Pressure [Pa]')
 
-        ax.quiver(self.x, self.y, self.mvx, self.mvy, angles='xy', scale=self.scale, label='Quantité mvt', color='black')
+        ax.quiver(self.x, self.y, self.mvx, self.mvy, angles='xy', scale=self.scale, label='$Dmu$', color='black')
 
         ax.set_xlabel('$x$ [m]')
         ax.set_ylabel('$y$ [m]')
         ax.set_title(title)
         set_graph_style(fig, ax)
+        fig.savefig('../graphs/dmv.pdf')
+        fig.savefig('../graphs/dmv.png', dpi=1000)
 
         return(fig, ax)
     #}
@@ -124,6 +128,8 @@ class Particles :
         ax.set_ylabel('$y$ [m]')
         ax.set_title('Courbure')
         set_graph_style(fig, ax)
+        fig.savefig('../graphs/curvature.pdf')
+        fig.savefig('../graphs/curvature.png', dpi=1000)
 
         return(fig, ax)
     #}
@@ -139,10 +145,10 @@ class Particles :
 
         ax[0].scatter(self.x, self.y, s=20, label='Particules')
         ax[0].quiver(self.x, self.y, -self.wGRPx, -self.wGRPy, angles='xy', scale=self.scale,
-            label='$-\omega GRP$', color='black')
+            label='$-\omega G^R_+(P)$', color='black')
         ax[0].set_xlabel('$x$ [m]')
         ax[0].set_ylabel('$y$ [m]')
-        ax[0].set_title('Force de pression ($-\omega$GRP)')
+        ax[0].set_title('Force de pression')
         ax[0].set_xlim((-r, r))
         ax[0].set_ylim((-r, r))
         set_graph_style(fig, ax[0])
@@ -152,10 +158,12 @@ class Particles :
             label='$\omega FTS$', color='black')
         ax[1].set_xlabel('$x$ [m]')
         ax[1].set_ylabel('$y$ [m]')
-        ax[1].set_title('Force de tension de surface ($\omega$FTS)')
+        ax[1].set_title('Force de tension de surface')
         ax[1].set_xlim((-r, r))
         ax[1].set_ylim((-r, r))
         set_graph_style(fig, ax[1])
+        fig.savefig('../graphs/forces.pdf')
+        fig.savefig('../graphs/forces.png', dpi=1000)
 
         return(fig, ax)
     #}

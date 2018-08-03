@@ -4,3 +4,4 @@ out-sph/avec-ts/*
 out-sph/sans-ts/*
 
 graphs/*.pdf
+graphs/*.png
