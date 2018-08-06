@@ -21,6 +21,10 @@ def set_graph_style(fig, ax) :
     fig.tight_layout()
 #}
 
+def norm(x, y) :
+    return(np.sqrt(x**2 + y**2))
+#}
+
 
 
 class Particles :
@@ -110,7 +114,7 @@ class Particles :
         ax.set_title(title)
         set_graph_style(fig, ax)
         fig.savefig('../graphs/dmv.pdf')
-        fig.savefig('../graphs/dmv.png', dpi=1000)
+        fig.savefig('../graphs/dmv.png', dpi=500)
 
         return(fig, ax)
     #}
@@ -129,7 +133,7 @@ class Particles :
         ax.set_title('Courbure')
         set_graph_style(fig, ax)
         fig.savefig('../graphs/curvature.pdf')
-        fig.savefig('../graphs/curvature.png', dpi=1000)
+        fig.savefig('../graphs/curvature.png', dpi=500)
 
         return(fig, ax)
     #}
@@ -163,7 +167,7 @@ class Particles :
         ax[1].set_ylim((-r, r))
         set_graph_style(fig, ax[1])
         fig.savefig('../graphs/forces.pdf')
-        fig.savefig('../graphs/forces.png', dpi=1000)
+        fig.savefig('../graphs/forces.png', dpi=500)
 
         return(fig, ax)
     #}

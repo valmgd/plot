@@ -26,6 +26,10 @@ print(somme_x, somme_y)
 qmvMax = 'Dmv max en norme euclidienne : ' + str(max(np.sqrt(part.mvx**2 + part.mvy**2)))
 print('\n', qmvMax)
 
+# quantité de mouvement max relative
+qmvMaxRel = 'Dmv max relative : ' + str( max( norm( part.mvx , part.mvy ) / norm( part.wGRPx , part.wGRPy ) ) )
+print('\n', qmvMaxRel)
+
 # intervalle de pression
 ip = 'Intervalle de pression : ' + '[' + str(min(part.P)) + ',' + str(max(part.P)) + ']'
 print('\n', ip)
@@ -45,6 +49,7 @@ print('\n', wTot)
 # -----------------------------------------------------------------------------------------------------------
 titre = 'Quantité de mvt avec TS\n initialisation bulle avec pression de Laplace\n$Dmu = -\omega GRP + \omega FTS$'
 fig, ax = part.plot_mvt_quantity(titre)
+ax.text(0.005, -0.010, s=qmvMaxRel)
 ax.text(0.005, -0.011, s=qmvMax)
 ax.text(0.005, -0.012, s=ip)
 ax.text(0.005, -0.013, s=vMax)
@@ -52,7 +57,9 @@ ax.text(0.005, -0.014, s=wTot)
 
 part.plot_ts_forces()
 
-part.plot_curvature()
+fig, ax = part.plot_curvature()
+kappaTheorique = 'Courbure attendue : ' + str(np.sqrt(np.pi / sum(part.w)))
+ax.text(0.005, -0.011, s=kappaTheorique)
 
 
 
